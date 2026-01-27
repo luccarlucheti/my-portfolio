@@ -1,0 +1,66 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Button from "../../components/Button.astro";
+
+// 1. Isso diz ao Astro quais rotas criar (en e pt)
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'pt' } },
+  ];
+}
+
+const { lang } = Astro.params;
+
+// 2. Dicionário de tradução simples
+const t = {
+  en: {
+    welcome: "WELCOME TO MY PORTFOLIO | DEVELOPED BY ME",
+    greeting: "Hello, I am",
+    description: "Aerospace Engineer graduated from UFSC and Software Developer at WEG. I focus on system implementation and have experience in engineering process automation with an emphasis on CFD and software development.",
+    about: "About me",
+    projects: "Projects",
+    contact: "Contact"
+  },
+  pt: {
+    welcome: "BEM-VINDO AO MEU PORTFÓLIO | DESENVOLVIDO POR MIM",
+    greeting: "Olá, eu sou",
+    description: "Engenheiro Aeroespacial formado pela UFSC e Desenvolvedor na WEG. Atuo na implementação de sistemas e automação de processos de engenharia com foco em CFD e software.",
+    about: "Sobre mim",
+    projects: "Projetos",
+    contact: "Contato"
+  }
+};
+
+const content = t[lang as keyof typeof t] || t.en;
+const l = (path: string) => `/${lang}${path}`;
+---
+
+<Layout>
+  <section class="min-h-[80vh] mx-[30vw] w-[50vw] flex flex-col justify-center items-start">
+    <div class="flex items-center gap-2 px-3 py-1 rounded-full bg-nebula/10 border border-nebula/20 text-nebula text-xs font-mono mb-6 animate-fade-in">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-nebula opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-nebula"></span>
+      </span>
+      {content.welcome}
+    </div>
+
+    <h1 class="text-5xl md:text-6xl font-bold tracking-tighter mb-6 leading-tight">
+      {content.greeting}<br />
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-nebula via-stellar to-starlight">
+        Lucca Lucheti
+      </span>
+    </h1>
+
+    <p class="text-hull text-lg md:text-xl max-w-xl leading-relaxed mb-10">
+      {content.description}
+    </p>
+
+    <div class="flex flex-wrap gap-4">
+        <Button href={l('/about')}> {content.about} </Button>
+        <Button href={l('/projects')}> {content.projects} </Button>
+        <Button href={l('/contact')} variant="outline"> {content.contact} </Button>
+    </div>
+  </section>
+</Layout>

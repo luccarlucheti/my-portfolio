@@ -1,0 +1,31 @@
+---
+// Pega a URL atual para saber onde o usuário está
+const { pathname } = Astro.url;
+
+// Função simples para trocar o prefixo da língua na URL
+const getTargetUrl = (lang: 'en' | 'pt') => {
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments[0] === 'en' || segments[0] === 'pt') {
+    segments[0] = lang;
+  } else {
+    segments.unshift(lang);
+  }
+  return `/${segments.join('/')}`;
+};
+---
+
+<div class="flex gap-2 text-xs font-mono border-l border-white/10 pl-4 ml-4">
+  <a 
+    href={getTargetUrl('en')} 
+    class={`hover:text-nebula transition-colors ${pathname.includes('/en') ? 'text-nebula font-bold' : 'text-hull'}`}
+  >
+    EN
+  </a>
+  <span class="text-white/20">|</span>
+  <a 
+    href={getTargetUrl('pt')} 
+    class={`hover:text-nebula transition-colors ${pathname.includes('/pt') ? 'text-nebula font-bold' : 'text-hull'}`}
+  >
+    PT
+  </a>
+</div>

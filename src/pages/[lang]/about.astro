@@ -1,0 +1,158 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Button from "../../components/Button.astro";
+import AboutCard from "../../components/AboutCard.astro";
+
+export function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "pt" } }];
+}
+
+const { lang } = Astro.params;
+
+const t = {
+  en: {
+    title: "About",
+    me: "Me",
+    overviewTitle: "Overview",
+    academicTitle: "Academic Path & Research",
+    professionalTitle: "Professional Experience",
+    hobbiesTitle: "Hobbies & Interests",
+    projectsCall:
+      "Interested in seeing my engineering projects or software architecture?",
+    viewProjects: "View Projects",
+    overview:
+      "Aerospace Engineer graduated from UFSC, with an academic background focused on Aerodynamics and Computational Fluid Dynamics (CFD), and a career specialized in software development. Currently, I work as a developer at WEG, implementing engineered sales systems.",
+    academic:
+      "During my undergraduate studies, I joined extracurricular projects in rocketry and high-efficiency electric vehicle competition teams. At the Simulation Laboratory (LaSiN), I conducted scientific research and published a technical paper focused on automating engineering simulations using Python. This path consolidated theoretical expertise in CAD and CFD, alongside practical experience in leadership and collaboration within teams.",
+    professional:
+      "I began my professional career in the Robotic Process Automation (RPA) sector, developing automations with Python and C#. Currently at WEG, where I have been since my internship, I am responsible for developing software for critical internal systems, with experience in Java, TypeScript, Go, SQL, and scalable system architecture.",
+    hobbies: "Beyond engineering, I enjoy sports like football and volleyball, cooking, and playing musical instruments. I have a deep-seated passion for music, which drives me to travel frequently to attend concerts and festivals. Additionally, I am profoundly interested in physics and cosmology, particularly the field of quantum physics and the laws that govern the universe.",
+  },
+  pt: {
+    title: "Sobre",
+    me: "Mim",
+    overviewTitle: "Visão Geral",
+    academicTitle: "Trajetória Acadêmica e Pesquisa",
+    professionalTitle: "Experiência Profissional",
+    hobbiesTitle: "Interesses e Hobbies",
+    projectsCall:
+      "Interessado em ver meus projetos de engenharia ou arquitetura de software?",
+    viewProjects: "Ver Projetos",
+    overview:
+      "Engenheiro Aeroespacial formado pela UFSC, com trajetória acadêmica voltada à Aerodinâmica e Dinâmica dos Fluidos Computacional (CFD), e carreira focada no desenvolvimento de software. Atualmente, atuo como desenvolvedor na WEG, implementando sistemas de vendas engenheiradas.",
+    academic:
+      "Durante a graduação, integrei projetos extracurriculares em equipes de competição de foguetemodelismo e veículos elétricos de alta eficiência. No Laboratório de Simulação (LaSiN), realizei iniciação científica e publiquei um artigo técnico focado na automação de simulações de engenharia via Python. Essa trajetória consolidou competências teóricas em CAD e CFD, além de vivência prática em liderança e colaboração em equipes.",
+    professional:
+      "Iniciei minha trajetória profissional no setor de Robotic Process Automation (RPA), desenvolvendo automações com Python e C#. Atualmente na WEG, onde atuo desde o estágio, sou responsável pelo desenvolvimento de software para sistemas internos críticos, com experiência em Java, TypeScript, Go, SQL e arquitetura de sistemas escaláveis.",
+    hobbies: "Além da engenharia, dedico meu tempo a esportes como futebol e vôlei, culinária e à prática de instrumentos musicais. Nutro uma grande paixão pela música, o que me move a viajar com frequência para acompanhar shows e festivais de minhas bandas preferidas. Além disso, possuo um profundo interesse por física e cosmologia, principalmente pelo campo da física quântica e das leis que regem o funcionamento do universo.",
+  },
+};
+
+const content = t[lang as keyof typeof t] || t.en;
+const l = (path: string) => `/${lang}${path}`;
+---
+
+<Layout title={`Lucca | ${content.title}`}>
+  <section class="py-4 px-8 md:px-14 md:py-8 animate-fade-in">
+    <div class="mb-8">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter mb-4">
+        {content.title}
+        <span class="text-nebula">{content.me}</span>
+      </h1>
+      <div class="h-1 w-20 bg-gradient-to-r from-nebula to-stellar"></div>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-12">
+      <div class="flex flex-col gap-8 lg:w-2/3">
+        <AboutCard title={content.overviewTitle}>
+          <p>{content.overview}</p>
+        </AboutCard>
+
+        <AboutCard title={content.academicTitle}>
+          <p>{content.academic}</p>
+        </AboutCard>
+
+        <AboutCard title={content.professionalTitle}>
+          <p>{content.professional}</p>
+        </AboutCard>
+
+        <AboutCard title={content.hobbiesTitle}>
+          <p>{content.hobbies}</p>
+        </AboutCard>
+      </div>
+
+      <div class="lg:w-1/3 space-y-6 flex flex-col justify-center">
+        <div class="flex justify-center w-full h-auto px-30 my-10">
+          <img
+            src="/profile.jpeg"
+            alt="Picture of Lucca Roncador Lucheti"
+            class="rounded-full overflow-hidden brightness-75 shadow-[0_0_20px_rgba(139,92,246,0.3)] border border-nebula/30"
+          />
+        </div>
+        <div class="bg-nebula/5 border border-nebula/20 p-6 rounded-2xl">
+          <h3
+            class="text-nebula font-mono text-sm mb-4 uppercase tracking-widest text-center"
+          >
+            Tech Stack & Tools
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            {
+              [
+                "Python",
+                "C#",
+                "Java",
+                "Go",
+                "TypeScript",
+                "C",
+                "SQL",
+                "React",
+                "Astro",
+                "HTML",
+                "CSS",
+                "Tailwind",
+                "CFD",
+                "OpenFoam",
+                "SolidWorks",
+                "CAD",
+                "Linux",
+                "RPA",
+                "Excel",
+              ].map((skill) => (
+                <span class="px-3 py-1 bg-void border border-white/10 rounded text-xs text-hull font-mono">
+                  {skill}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+
+        <div
+          class="p-6 border border-white/5 rounded-2xl flex flex-col items-center bg-void/50"
+        >
+          <p class="text-sm text-hull mb-4 text-center italic">
+            {content.projectsCall}
+          </p>
+          <Button href={l("/projects")} class="w-full py-2 text-sm"
+            >{content.viewProjects}</Button
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+</style>

@@ -1,23 +1,31 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import Navbar from "../components/Navbar.astro";
+import "../styles/global.css";
+const { title = "Meu Portfolio" } = Astro.props;
+---
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+<!doctype html>
+<html lang="pt-br" class="h-full dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+  </head>
+
+  <body
+    class="h-full flex flex-col bg-void text-starlight antialiased overflow-hidden"
+  >
+    <Navbar />
+
+    <main id="contentArea" class="flex-1 overflow-y-auto">
+      <div
+        class="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--color-nebula)_0%,_transparent_25%)] opacity-10 pointer-events-none"
+      >
+      </div>
+
+      <div class="relative w-full">
+        <slot />
+      </div>
+    </main>
+  </body>
+</html>

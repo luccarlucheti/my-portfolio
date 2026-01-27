@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+@theme {
+  /* Fundo "Espaço Profundo" */
+  --color-void: #0B0E14;
+  /* Roxo "Nebulosa" (Destaque principal) */
+  --color-nebula: #8B5CF6;
+  /* Azul "Stellar" (Destaque secundário/links) */
+  --color-stellar: #3B82F6;
+  /* Cinza "Metal/Nave" (Textos secundários) */
+  --color-hull: #94A3B8;
+  /* Branco "Estrela" (Texto principal) */
+  --color-starlight: #F8FAFC;
+}
+
+button:not([disabled]), [role="button"]:not([disabled]) {
+  cursor: pointer;
+}

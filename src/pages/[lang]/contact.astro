@@ -1,0 +1,139 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+export function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "pt" } }];
+}
+
+const { lang } = Astro.params;
+
+const t = {
+  en: {
+    title: "Contact",
+    subtitle: "Let's connect",
+    text: "I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Feel free to reach out!",
+    emailLabel: "Email me at",
+    linkedinLabel: "Let's connect",
+    formName: "Name",
+    formEmail: "Email",
+    formMessage: "Message",
+    formSubmit: "Send Message",
+  },
+  pt: {
+    title: "Contato",
+    subtitle: "Vamos conversar",
+    text: "Estou sempre aberto a discutir novos projetos, ideias criativas ou oportunidades para fazer parte de suas visões. Sinta-se à vontade para entrar em contato!",
+    emailLabel: "Mande um e-mail",
+    linkedinLabel: "Conecte-se comigo",
+    formName: "Nome",
+    formEmail: "E-mail",
+    formMessage: "Mensagem",
+    formSubmit: "Enviar Mensagem",
+  },
+};
+
+const content = t[lang as keyof typeof t] || t.en;
+---
+
+<Layout title={`Lucca | ${content.title}`}>
+  <section class="py-12 px-8 md:px-24 animate-fade-in">
+    <div class="mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter mb-2">
+        {content.title}
+      </h1>
+      <p class="text-nebula font-mono text-sm uppercase tracking-[0.2em]">
+        {content.subtitle}
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-6 items-center">
+      <div class="w-[50%] mb-4">
+        <p class="text-hull leading-relaxed mb-6">
+          {content.text}
+        </p>
+        <div class="flex flex-col gap-4">
+          <div>
+            <p class="text-[20px] text-nebula font-mono uppercase mb-1">
+              {content.emailLabel}
+            </p>
+            luccarlucheti@gmail.com
+          </div>
+          <div>
+            <p class="text-[20px] text-nebula font-mono uppercase mb-1">
+              {content.linkedinLabel}
+            </p>
+            <a
+              href="https://www.linkedin.com/in/lucca-lucheti-105aa6234"
+              target="_blank"
+              class="text-starlight hover:text-nebula transition-colors underline decoration-nebula/30 underline-offset-4"
+            >
+              www.linkedin.com/lucca-lucheti
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <form
+        action="https://formspree.io/f/xdagjjrn"
+        method="POST"
+        class="flex flex-col gap-6 items-center w-[50%]"
+      >
+        <div class="w-full">
+          <label class="block text-xs text-nebula font-mono uppercase mb-2"
+            >{content.formName}</label
+          >
+          <input
+            type="text"
+            name="name"
+            required
+            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-starlight focus:outline-none focus:border-nebula/50 transition-all"
+          />
+        </div>
+        <div class="w-full">
+          <label class="block text-xs text-nebula font-mono uppercase mb-2"
+            >{content.formEmail}</label
+          >
+          <input
+            type="email"
+            name="email"
+            required
+            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-starlight focus:outline-none focus:border-nebula/50 transition-all"
+          />
+        </div>
+        <div class="w-full">
+          <label class="block text-xs text-nebula font-mono uppercase mb-2"
+            >{content.formMessage}</label
+          >
+          <textarea
+            name="message"
+            rows="4"
+            required
+            class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-starlight focus:outline-none focus:border-nebula/50 transition-all resize-none"
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          class="bg-nebula px-6 py-3 rounded-lg"
+        >
+          {content.formSubmit}
+        </button>
+      </form>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+</style>

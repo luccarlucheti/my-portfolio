@@ -1,0 +1,174 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+
+export function getStaticPaths() {
+  return [{ params: { lang: "en" } }, { params: { lang: "pt" } }];
+}
+
+const { lang } = Astro.params;
+
+const t = {
+  en: {
+    title: "Projects",
+    subtitle: "Engineering & Software",
+    lasin: {
+      title: "LaSiN",
+      description:
+        "Member of the Naval Simulation Laboratory at UFSC for 2 years, conducting scientific research funded by FEESC in partnership with Petrobras. My research focused on developing Python scripts to automate CFD simulations in OpenFoam, targeting the hydrodynamic performance analysis of ship hulls. I presented the final results at SOBENA 2023, a major naval engineering conference in Rio de Janeiro.",
+      tech: ["Python", "OpenFoam", "Linux", "CFD"],
+    },
+    kosmos: {
+      title: "Kosmos Rocketry",
+      description:
+        "Led the Aerodynamics department of the Kosmos rocketry team for two years during my undergraduate studies. I was responsible for the technical workflow involving CAD design and CFD flow simulations (OpenFoam), while fostering leadership skills and collaboration within multidisciplinary competition teams.",
+      tech: ["Aerodynamics", "CAD", "OpenFoam", "Leadership"],
+    },
+    eficem: {
+      title: "Eficem",
+      description:
+        "Part of the electrical department of the EFICEM team, which designs and builds high-efficiency electric vehicles. I worked on the design and assembly of the motor controller, including C programming for microcontrollers. Additionally, I contributed to telemetry data acquisition, Python-based dashboards, and general electrical circuit design.",
+      tech: ["C", "Embedded Systems", "Python", "Electronics"],
+    },
+    player6: {
+      title: "Player 6",
+      description:
+        "A project conceived to master the fundamentals of software development. I built a web application for organizing amateur e-sports competitions, which allowed me to explore the full product cycle: from UI/UX design to front-end and back-end implementation.",
+      tech: ["HTML", "CSS", "JavaScript", "Software Design"],
+    },
+    nomad: {
+      title: "Nomad Way",
+      description:
+        "A creative initiative focused on producing music covers for YouTube. I was responsible for creating the visual identity, channel design, and audiovisual production. The project merged my passion for music with digital production skills, serving as a creative and collaborative outlet.",
+      tech: ["Audiovisual Production", "Graphic Design", "Music"],
+    },
+  },
+  pt: {
+    title: "Projetos",
+    subtitle: "Engenharia e Software",
+    lasin: {
+      title: "LaSiN",
+      description:
+        "Atuei por 2 anos no Laboratório de Simulação Naval da UFSC, onde realizei uma iniciação científica bolsista pela FEESC em parceria com a Petrobras. Minha pesquisa focou no desenvolvimento de scripts em Python para a automação de simulações CFD no OpenFoam, visando a análise de desempenho hidrodinâmico de cascos. O trabalho culminou na publicação e apresentação de um artigo técnico no SOBENA 2023, no Rio de Janeiro.",
+      tech: ["Python", "OpenFoam", "Linux", "CFD"],
+    },
+    kosmos: {
+      title: "Kosmos Foguetemodelismo",
+      description:
+        "Durante a graduação, liderei o setor de aerodinâmica da equipe Kosmos por dois anos. Além de coordenar a frente técnica de design CAD e simulações de escoamento via CFD (OpenFoam), desenvolvi competências sólidas em liderança de projetos e colaboração em equipes multidisciplinares voltadas a competições de alto nível.",
+      tech: ["Aerodinâmica", "CAD", "OpenFoam", "Liderança"],
+    },
+    eficem: {
+      title: "Eficem",
+      description:
+        "Integrei o setor de elétrica da equipe EFICEM, focada no desenvolvimento de veículos elétricos de alta eficiência energética. Atuei no projeto e montagem do controlador de motor, realizando a programação em C de microcontroladores. Também contribuí na extração de dados e criação de dashboards de telemetria em Python, além do design de circuitos elétricos do veículo.",
+      tech: ["C", "Sistemas Embarcados", "Python", "Eletrônica"],
+    },
+    player6: {
+      title: "Player 6",
+      description:
+        "Projeto idealizado para consolidar meus primeiros passos no desenvolvimento de software. Criei uma aplicação web voltada à organização de torneios de e-sports, o que me permitiu explorar o ciclo completo de um produto: do design de interface (UI/UX) à implementação das lógicas de front-end e back-end.",
+      tech: ["HTML", "CSS", "JavaScript", "Software Design"],
+    },
+    nomad: {
+      title: "Nomad Way",
+      description:
+        "Iniciativa criativa voltada à produção de conteúdo musical para o YouTube. Fui responsável pela concepção da identidade visual, design de canal e edição audiovisual. O projeto uniu meu hobby pela música com aprendizados de produção digital, sendo uma válvula de escape criativa e colaborativa.",
+      tech: ["Produção Audiovisual", "Design Gráfico", "Música"],
+    },
+  },
+};
+
+const content = t[lang as keyof typeof t] || t.en;
+---
+
+<Layout title={`Lucca | ${content.title}`}>
+  <section class="py12 px-8 md:py-8 md:px14 animate-fade-in">
+    <div class="mb12">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tighter mb-2">
+        {content.title}
+      </h1>
+      <p class="text-nebula font-mono text-sm uppercase tracking-[0.2em]">
+        {content.subtitle}
+      </p>
+      <div class="h1 w-20 bg-gradient-to-r from-nebula to-stellar mt-4"></div>
+    </div>
+
+    <div class="grid grid-cols1 md:grid-cols-2 gap-8">
+      <ProjectCard
+        title={content.lasin.title}
+        description={content.lasin.description}
+        technologies={content.lasin.tech}
+        images={[
+          "/lasin1.jpeg",
+          "/lasin2.jpeg",
+          "/lasin3.jpeg",
+          "/lasin4.jpeg",
+        ]}
+      />
+      <ProjectCard
+        title={content.kosmos.title}
+        description={content.kosmos.description}
+        technologies={content.kosmos.tech}
+        images={[
+          "/kosmos1.png",
+          "/kosmos2.png",
+          "/kosmos3.png",
+          "/kosmos4.png",
+          "/kosmos5.jpg",
+        ]}
+      />
+      <ProjectCard
+        title={content.eficem.title}
+        description={content.eficem.description}
+        technologies={content.eficem.tech}
+        images={[
+          "/eficem1.jpeg",
+          "/eficem2.jpeg",
+          "/eficem3.jpeg",
+          "/eficem4.jpeg",
+        ]}
+      />
+      <ProjectCard
+        title={content.player6.title}
+        description={content.player6.description}
+        technologies={content.player6.tech}
+        images={[
+          "/player61.jpg",
+          "/player62.jpg",
+          "/player63.jpg",
+          "/player64.jpg",
+          "/player65.jpg",
+          "/player66.png",
+        ]}
+      />
+      <ProjectCard
+        title={content.nomad.title}
+        description={content.nomad.description}
+        technologies={content.nomad.tech}
+        images={[
+          "/nomadway1.png",
+          "/nomadway2.png",
+          "/nomadway3.png",
+          "/nomadway4.png",
+        ]}
+      />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+</style>

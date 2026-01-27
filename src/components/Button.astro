@@ -1,0 +1,25 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'outline';
+  class?: string; // Para permitir ajustes finos de margem, etc.
+}
+
+const { href, variant = 'primary', class: className, ...rest } = Astro.props;
+
+// Mapeamento das variantes para as classes do Tailwind
+const variants = {
+  primary: "bg-nebula hover:bg-nebula/80 text-starlight shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_30px_rgba(139,92,246,0.5)]",
+  outline: "bg-transparent border border-hull/30 text-hull hover:text-nebula hover:border-nebula/80"
+};
+
+const baseStyles = "px-8 py-3 font-bold rounded-lg transition-all inline-block text-center";
+---
+
+<a 
+  href={href} 
+  class:list={[baseStyles, variants[variant], className]} 
+  {...rest}
+>
+  <slot />
+</a>
